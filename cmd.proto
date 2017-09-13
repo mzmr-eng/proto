@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package mzmr.cmd;
+
+message FrameStatus {
+	uint32 frame_number = 1;
+}
+
+message Command {
+	oneof cmd_data {
+		Done done = 1;
+		SetResource set_resource = 2;
+		Draw draw = 3;
+	}
+}
+
+message Done {
+	uint32 frame_number = 1;
+}
+
+message SetResource {
+	string namespace = 1;
+	string name = 2;
+	oneof resource {
+		Buffer buffer = 3;
+		Indices indices = 4;
+		Program program = 5;
+	}
+}
+message Buffer {
+	uint32 dim = 1;
+	repeated float data = 2;
+}
+
+message Indices {
+	repeated uint32 data = 1;
+}
+
+message Program {
+	string vert_source = 1;
+	string frag_source = 2;
+}
+
+message Draw {
+	string program_namespace = 1;
+	string program_name = 2;
+
+	repeated string uniform_namespaces = 3;
+	repeated string attribute_namespaces = 4;
+}
