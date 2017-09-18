@@ -27,6 +27,7 @@ message SetResource {
 		Program program = 5;
 	}
 }
+
 message Buffer {
 	uint32 dim = 1;
 	repeated float data = 2;
